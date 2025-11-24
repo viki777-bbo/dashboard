@@ -1,0 +1,34 @@
+<div class="header">
+    <h2 id="greeting"></h2>
+
+    <script>
+        (function () {
+            const student = 'Viktor';
+            const greetingE1 = document.getElementById('greeting')
+
+            function updateGreeting() {
+                const hour = new Date().getHours();
+                let msg = '';
+               if (hour < 12) {
+                msg = 'Dobré ráno';
+               } else if (hour < 18) {
+                msg = 'Dobré odpoledne';
+               } else {
+                msg = 'Dobrý večer';
+               } 
+               greetingE1.textContent = msg + ', ' + student + '!' ;
+            }
+            updateGreeting();
+        })();
+    </script>
+<style>
+#dashboard .header h2#greeting {
+    font-family: "Arial Black", Gadget, sans-serif; 
+    font-size: 50px; 
+    color: #FFD700;
+    text-align: center; 
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+}
+</style>
+</div>
