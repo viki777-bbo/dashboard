@@ -21,6 +21,7 @@
             const descEl = document.getElementById('weather-desc');
             const cityEl = document.querySelector('.weather-city');
 
+            // Souřadnice pro Uherské Hradiště
             const lat = 49.0697;
             const long = 17.4594;
             
@@ -37,7 +38,6 @@
 
             // URL pro API s našimi souřadnicemi
             const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`;
-
             // Získání počasí
             fetch(weatherUrl)
                 .then(response => response.json())

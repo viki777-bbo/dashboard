@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka Widget</title>
+</head>
+<body>
+    <div class="simple-calc">
+        <!-- Displej pro zobrazení čísel -->
+        <input type="text" id="calc-input" readonly>
+        
+        <!-- Kontejner pro tlačítka -->
+        <div class="buttons">
+            <!-- Číselná tlačítka -->
+            <button onclick="calcAppend('7')">7</button>
+            <button onclick="calcAppend('8')">8</button>
+            <button onclick="calcAppend('9')">9</button>
+            <button onclick="calcAppend('/')" class="op">/</button>
+            
+            <button onclick="calcAppend('4')">4</button>
+            <button onclick="calcAppend('5')">5</button>
+            <button onclick="calcAppend('6')">6</button>
+            <button onclick="calcAppend('*')" class="op">*</button>
+            
+            <button onclick="calcAppend('1')">1</button>
+            <button onclick="calcAppend('2')">2</button>
+            <button onclick="calcAppend('3')">3</button>
+            <button onclick="calcAppend('-')" class="op">-</button>
+            
+            <button onclick="calcAppend('0')">0</button>
+            <button onclick="calcAppend('.')">.</button>
+            <button onclick="calcResult()" class="op">=</button>
+            <button onclick="calcAppend('+')" class="op">+</button>
+            
+            <!-- Speciální tlačítko pro vymazání -->
+            <button onclick="calcClear()" class="clear">C</button>
+        </div>
+    </div>
+
+    <script>
+        // Přidání znaku na displej
+        window.calcAppend = function(val) {
+            document.getElementById('calc-input').value += val;
+        }
+
+        // Výpočet výsledku pomocí eval()
+        window.calcResult = function() {
+            try {
+                const input = document.getElementById('calc-input');
+                input.value = eval(input.value);
+            } catch(e) {
+                alert('Chyba');
+            }
+        }
+
+        // Vymazání displeje
+        window.calcClear = function() {
+            document.getElementById('calc-input').value = '';
+        }
+    </script>
+
+    <style>
+        /* Hlavní kontejner - mřížka 4 sloupce */
+        .simple-calc {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            max-width: 200px;
+        }
+
+        /* Displej přes celou šířku (4 sloupce) */
+        #calc-input {
+            grid-column: span 4;
+            text-align: right;
+            padding: 4px;
+            font-weight: bold;
+            color: black;
+            background-color: rgba(128, 128, 128, 0.3);
+        }
+
+        /* Tlačítka jsou součástí mřížky */
+        .buttons {
+            display: contents;
+        }
+
+        /* Tlačítko C přes celou šířku */
+        .buttons .clear {
+            grid-column: span 4;
+        }
+
+        /* Vzhled tlačítek */
+        button {
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: black;
+            background-color: rgba(128, 128, 128, 0.3);
+            border: 1px solid gray;
+        }
+    </style>
+</body>
+</html>
