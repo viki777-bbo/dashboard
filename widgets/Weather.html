@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Widget</title>
+</head>
+<body>
+    <div class="weather-widget">
+        <!-- Místo pro název města -->
+        <div class="weather-city">Načítám...</div>
+        <!-- Místo pro teplotu -->
+        <div class="weather-temp" id="weather-temp">--°C</div>
+        <!-- Místo pro popis (jasno, prší...) -->
+        <div class="weather-desc" id="weather-desc">Načítám...</div>
+    </div>
+
+    <script>
+        (function() {
+            const tempEl = document.getElementById('weather-temp');
+            const descEl = document.getElementById('weather-desc');
+            const cityEl = document.querySelector('.weather-city');
+
+            const lat = 49.0697;
+            const long = 17.4594;
+            
+            // Pomocná funkce pro popis počasí
+            function getWeatherDescription(code) {
+                if (code === 0) return 'Jasno';
+                if (code >= 1 && code <= 3) return 'Polojasno';
+                if (code >= 45 && code <= 48) return 'Mlha';
+                if (code >= 51 && code <= 67) return 'Déšť';
+                if (code >= 71 && code <= 77) return 'Sníh';
+                if (code >= 95) return 'Bouřka';
+                return 'Neznámé';
+            }
+
+            // URL pro API s našimi souřadnicemi
+            const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`;
+
+            // Získání počasí
+            fetch(weatherUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const temp = data.current_weather.temperature;
+                    const code = data.current_weather.weathercode;
+                    tempEl.textContent = `${temp}°C`;
+                    descEl.textContent = getWeatherDescription(code);
+                });
+
+            // URL pro BigDataCloud API (Reverse Geocoding)
+            const geoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=cs`;
+
+            // Získání názvu města
+            fetch(geoUrl)
+                .then(response => response.json())
+                .then(data => {
+                    cityEl.textContent = data.city || data.locality || 'Neznámé místo';
+                });
+        })();
+    </script>
+
+    <style>
+        .weather-widget {
+            text-align: center;
+            color: black;
+            font-weight: bold;
+        }
+
+        .weather-city {
+            font-size: 24px;
+        }
+
+        .weather-temp {
+            font-size: 64px;
+        }
+
+        .weather-desc {
+            font-size: 20px;
+        }
+    </style>
+</body>
+</html>
