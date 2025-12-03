@@ -35,7 +35,6 @@
     </div>
 
     <script>
-
         window.calcAppend = function(val) {
             document.getElementById('calc-input').value += val;
         }
@@ -49,7 +48,6 @@
             }
         }
 
-        // Vymazání displeje
         window.calcClear = function() {
             document.getElementById('calc-input').value = '';
         }
@@ -61,7 +59,9 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 4px;
-            max-width: 200px;
+            width: 100%;           /* Změna: 100% šířky rodiče */
+            height: 100%;          /* Změna: 100% výšky rodiče */
+            box-sizing: border-box;
         }
 
         /* Displej přes celou šířku (4 sloupce) */
@@ -72,6 +72,7 @@
             font-weight: bold;
             color: black;
             background-color: rgba(128, 128, 128, 0.3);
+            font-size: clamp(14px, 3vw, 24px); /* Responzivní velikost textu */
         }
 
         /* Tlačítka jsou součástí mřížky */
@@ -84,7 +85,6 @@
             grid-column: span 4;
         }
 
-        
         button {
             padding: 8px;
             cursor: pointer;
@@ -92,6 +92,7 @@
             color: black;
             background-color: rgba(128, 128, 128, 0.3);
             border: 1px solid gray;
+            font-size: clamp(12px, 2.5vw, 20px); 
         }
     </style>
 </body>
