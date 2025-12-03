@@ -62,21 +62,31 @@
 
     <style>
         .weather-widget {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             color: black;
             font-weight: bold;
+            box-sizing: border-box;
+            padding: 10px;
         }
 
         .weather-city {
-            font-size: 24px;
+            font-size: clamp(16px, 4vw, 32px);
+            margin-bottom: 0.5em;
         }
 
         .weather-temp {
-            font-size: 64px;
+            font-size: clamp(32px, 10vw, 80px);
+            margin-bottom: 0.3em;
         }
 
         .weather-desc {
-            font-size: 20px;
+            font-size: clamp(14px, 3vw, 24px);
         }
     </style>
 </body>
