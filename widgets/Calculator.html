@@ -7,12 +7,9 @@
 </head>
 <body>
     <div class="simple-calc">
-        <!-- Displej pro zobrazení čísel -->
         <input type="text" id="calc-input" readonly>
         
-        <!-- Kontejner pro tlačítka -->
         <div class="buttons">
-            <!-- Číselná tlačítka -->
             <button onclick="calcAppend('7')">7</button>
             <button onclick="calcAppend('8')">8</button>
             <button onclick="calcAppend('9')">9</button>
@@ -32,19 +29,17 @@
             <button onclick="calcAppend('.')">.</button>
             <button onclick="calcResult()" class="op">=</button>
             <button onclick="calcAppend('+')" class="op">+</button>
-            
-            <!-- Speciální tlačítko pro vymazání -->
+
             <button onclick="calcClear()" class="clear">C</button>
         </div>
     </div>
 
     <script>
-        // Přidání znaku na displej
+
         window.calcAppend = function(val) {
             document.getElementById('calc-input').value += val;
         }
 
-        // Výpočet výsledku pomocí eval()
         window.calcResult = function() {
             try {
                 const input = document.getElementById('calc-input');
@@ -89,7 +84,7 @@
             grid-column: span 4;
         }
 
-        /* Vzhled tlačítek */
+        
         button {
             padding: 8px;
             cursor: pointer;
