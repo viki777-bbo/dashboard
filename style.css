@@ -45,12 +45,20 @@ body {
 .widget.third {
   grid-column: span 3; /* Polovina šířky - 6 sloupců */
 }
-
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .widget.half {
     grid-column: 1 / -1;
   }
   .widget.third {
-    grid-column: 1 /-1;
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 400px) {
+  .widget.half {
+    grid-column: 1 / -1;
+  }
+  .widget.third {
+    grid-column: 1 / -1;
   }
 }
