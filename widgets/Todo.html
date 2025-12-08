@@ -54,14 +54,11 @@
         }
     </script>
 
-    <style>
-        /* Reset */
+<style>
         body {
             margin: 0;
             padding: 0;
         }
-
-        /* Hlavní kontejner */
         .todo-widget {
             width: 100%;
             height: 100%;
@@ -69,15 +66,11 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Arial, sans-serif;
         }
-
-        /* Nadpis */
         .todo-widget h3 {
             color: #ff0000;
             margin: 0 0 15px 0;
             font-size: 24px;
         }
-
-        /* Flex layout */
         .input-group,
         .todo-widget li,
         .todo-item-content {
@@ -85,8 +78,6 @@
             align-items: center;
             gap: 10px;
         }
-
-        /* Input pole */
         .input-group input {
             flex: 1;
             padding: 12px;
@@ -95,8 +86,6 @@
             border-radius: 8px;
             font-size: 14px;
         }
-
-        /* Tlačítko přidat */
         .input-group button {
             padding: 12px 20px;
             background: #ff0000;
@@ -107,39 +96,30 @@
             font-weight: bold;
             font-size: 18px;
         }
-
         .input-group button:hover {
             background: #cc0000;
         }
-
-        /* Seznam */
         .todo-widget ul {
             list-style: none;
             padding: 0;
             margin: 10px 0 0 0;
         }
-
-        /* Todo položky */
         .todo-widget li {
             padding: 12px;
             margin-bottom: 8px;
             background: rgba(255, 0, 0, 0.1);
             border: 2px solid #ff0000;
             border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
         }
-
-        /* Hotový úkol */
         .completed span {
             text-decoration: line-through;
             font-weight: bold;
         }
-
-        /* Kurzor na tlačítka */
         .todo-widget button {
             cursor: pointer;
         }
-
-        /* Tlačítko smazat */
         .delete-btn {
             background: #ff0000;
             color: #fff;
@@ -149,7 +129,6 @@
             font-weight: bold;
             font-size: 18px;
         }
-
         .delete-btn:hover {
             background: #cc0000;
         }
