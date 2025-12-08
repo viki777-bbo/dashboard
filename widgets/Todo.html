@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Widget</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <div class="todo-widget" x-data="todoWidget()">
+        <h3>Úkoly</h3>
+        
+        <div class="input-group">
+            <input type="text" x-model="newTodo" @keyup.enter="add()" placeholder="Nový úkol...">
+            <button @click="add()">+</button>
+        </div>
+        
+        <ul>
+            <template x-for="todo in todos" :key="todo.id">
+                <li :class="{ 'completed': todo.completed }">
+                    <div class="todo-item-content">
+                        <input type="checkbox" x-model="todo.completed">
+                        <span x-text="todo.text"></span>
+                    </div>
+                    <button @click="remove(todo.id)" class="delete-btn">&times;</button>
+                </li>
+            </template>
+        </ul>
+    </div>
+
+    <script>
+        function todoWidget() {
+            return {
+                newTodo: '',
+                todos: JSON.parse(localStorage.getItem('todos') || '[]'),
+                init() {
+                    this.$watch('todos', (value) => {
+                        localStorage.setItem('todos', JSON.stringify(value));
+                    });
+                },
+                add() {
+                    if (this.newTodo.trim() === '') return;
+                    this.todos.push({
+                        id: Date.now(),
+                        text: this.newTodo,
+                        completed: false
+                    });
+                    this.newTodo = '';
+                },
+                remove(id) {
+                    this.todos = this.todos.filter(todo => todo.id !== id);
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Reset */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hlavní kontejner */
+        .todo-widget {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Nadpis */
+        .todo-widget h3 {
+            color: #ff0000;
+            margin: 0 0 15px 0;
+            font-size: 24px;
+        }
+
+        /* Flex layout */
+        .input-group,
+        .todo-widget li,
+        .todo-item-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Input pole */
+        .input-group input {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Tlačítko přidat */
+        .input-group button {
+            padding: 12px 20px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .input-group button:hover {
+            background: #cc0000;
+        }
+
+        /* Seznam */
+        .todo-widget ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+
+        /* Todo položky */
+        .todo-widget li {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+        }
+
+        /* Hotový úkol */
+        .completed span {
+            text-decoration: line-through;
+            font-weight: bold;
+        }
+
+        /* Kurzor na tlačítka */
+        .todo-widget button {
+            cursor: pointer;
+        }
+
+        /* Tlačítko smazat */
+        .delete-btn {
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .delete-btn:hover {
+            background: #cc0000;
+        }
+    </style>
+</body>
+</html>
