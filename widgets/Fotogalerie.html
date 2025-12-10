@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotogalerie</title>
+</head>
+<body>
+    <div class="gallery-widget">
+        <!-- Nadpis -->
+        <h3>Fotogalerie</h3>
+        
+        <div class="gallery-grid">
+            <img src="widgets\photo1.jpg" alt="Foto 1">
+            <img src="widgets\photo2.jpg" alt="Foto 2">
+            <img src="widgets\photo3.jpg" alt="Foto 3">
+            <img src="widgets\photo4.jpg" alt="Foto 4">
+            <img src="widgets\photo5.jpg" alt="Foto 5">
+            <img src="widgets\photo6.jpg" alt="Foto 6">
+        </div>
+    </div>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hlavní kontejner */
+        .gallery-widget {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Nadpis galerie */
+        .gallery-widget h3 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+        }
+
+        /* Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        /* Styly pro fotky */
+        .gallery-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;           
+            border-radius: 12px;         
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);  
+        }
+    </style>
+</body>
+</html>
