@@ -3,37 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volkswagen Vehicle Counter Widget</title>
+    <title>Volkswagen Vehicle Production Counter</title>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <style>
-        .vw-counter-widget { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; padding: 10px; background: transparent; font-family: 'Russo One', sans-serif; text-align: center; }
-        .car-image { max-width: 150px; margin-bottom: 10px; transition: transform 0.3s ease, opacity 0.3s ease; }
-        .counter-header { font-size: 20px; color: black; margin-bottom: 10px; }
-        .counter { font-size: 48px; color: red; margin-top: 10px; }
-        @keyframes counterAnimation { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Russo One', sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Keep the widget at the top */
+            min-height: 100vh; /* Allow for scrolling */
+        }
+
+        .widget-container {
+            text-align: center;
+            padding: 10px;
+            background: transparent; /* No background */
+            border: none;
+            width: 250px; /* Adjusted to make it fit well */
+            margin-top: 20px; /* Some space at the top */
+        }
+
+        /* Scaled down image with a little margin */
+        .car-image { 
+            max-width: 120px; /* Scaled down to fit properly */
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, opacity 0.5s ease;
+        }
+
+        .counter-header {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .counter {
+            font-size: 40px;
+            color: #e60000; /* VW red */
+            font-weight: bold;
+        }
+
+        /* Popout effect for the car image when counter increases */
+        .popout {
+            transform: scale(1.1);
+        }
+
+        /* Image fades out on hover */
+        .car-image:hover {
+            opacity: 0; /* Fades out completely */
+        }
     </style>
 </head>
 <body>
-    <div class="vw-counter-widget" id="vwCounterWidget">
-        <div class="counter-header">Volkswagen Vehicles Produced Today</div>
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.carsized.com%2Fresources%2Fvolkswagen%2Fgolf%2Fd-gti%2F2019%2Fsl_246119110_volkswagen-golf-2019-side-view_4x.png&f=1&nofb=1&ipt=d5184248f7b3b7b43dbab64a499fa570c48700c7e7811704c8bc7d9429db2280" alt="Volkswagen Car" class="car-image" id="carImage">
+    <!-- The widget container for VW counter -->
+    <div class="widget-container" id="vwCounterWidget">
+        <img id="carImage" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.carsized.com%2Fresources%2Fvolkswagen%2Fgolf%2Fd%2F2012%2Fsl_243115104_volkswagen-golf-2012-side-view_4x.png&f=1&nofb=1&ipt=5d0c3aecf631b5ef00ab624582169178fa7c38bedfdae1c480da36e2c954c1c1" alt="Volkswagen Golf" class="car-image">
+        <div class="counter-header">VW Vehicles Today</div>
         <div class="counter" id="counter">0</div>
     </div>
 
     <script>
-        const carsPerDay = 10000; // Cars produced per day
-        const popImage = () => { 
-            const carImage = document.getElementById('carImage');
-            carImage.style.transform = 'scale(1.1)'; carImage.style.opacity = '0.9';
-            setTimeout(() => { carImage.style.transform = 'scale(1)'; carImage.style.opacity = '1'; }, 300);
-        };
+        const carsPerDay = 10000;
+        let lastProduced = 0;
+
         const updateCounter = () => {
-            const now = new Date(), startOfDay = new Date(now.setHours(0, 0, 0, 0));
-            const carsProduced = Math.floor(((now - startOfDay) / 1000 / 60 / 60 / 24) * carsPerDay);
-            const currentCount = parseInt(document.getElementById('counter').textContent);
-            if (carsProduced > currentCount) { document.getElementById('counter').textContent = carsProduced; popImage(); }
+            const now = new Date();
+            const startOfDay = new Date(now.setHours(0, 0, 0, 0));
+            const secondsSinceMidnight = Math.floor((new Date() - startOfDay) / 1000);
+            const carsProduced = Math.floor((secondsSinceMidnight / 86400) * carsPerDay);
+            
+            const counterElement = document.getElementById('counter');
+            counterElement.textContent = carsProduced;
+
+            if (carsProduced > lastProduced) {
+                const carImage = document.getElementById('carImage');
+                carImage.classList.add('popout');
+                setTimeout(() => carImage.classList.remove('popout'), 300);
+                lastProduced = carsProduced;
+            }
         };
-        setInterval(updateCounter, 1000); updateCounter(); // Start on page load
+
+        setInterval(updateCounter, 1000);
+        updateCounter(); // Initial update on page load
     </script>
 </body>
 </html>
