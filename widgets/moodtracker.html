@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cs">
+<meta charset="UTF-8">
+
+<div id="mt">
+  <div id="q">Jak se dnes cítíš?</div>
+
+  <input type="date" id="d">
+
+  <div id="m">
+    <span>😄</span>
+    <span>🙂</span>
+    <span>😐</span>
+    <span>😕</span>
+    <span>😡</span>
+  </div>
+
+  <div id="h"></div>
+</div>
+
+<style>
+  #mt {
+    all: unset;
+    display: block;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    font-size: 1.5em; 
+  }
+
+  #q {
+    font-weight: 400;
+    margin-bottom: .4em;
+  }
+
+  #m span {
+    cursor: pointer;
+    margin-right: .6em;
+  }
+
+  #d {
+    font-size: 1em;
+    margin-bottom: .6em;
+  }
+</style>
+
+<script>
+  const d = document.getElementById('d')
+  const m = document.querySelectorAll('#m span')
+  const h = document.getElementById('h')
+
+  const days = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota']
+
+  const today = new Date().toISOString().slice(0,10)
+  d.value = today
+
+  const load = () => JSON.parse(localStorage.mood || '{}')
+  const save = x => localStorage.mood = JSON.stringify(x)
+
+  function setActive(v){
+    m.forEach(e => e.style.opacity = e.textContent === v ? 1 : .3)
+  }
+
+  m.forEach(e => e.onclick = () => {
+    const x = load()
+    x[d.value] = e.textContent
+    save(x)
+    setActive(e.textContent)
+    render()
+  })
+
+  d.onchange = () => setActive(load()[d.value])
+  function render(){
+    const x = load()
+    h.innerHTML = ''
+    for(let i=6;i>=0;i--){
+      const t = new Date()
+      t.setDate(t.getDate()-i)
+      const k = t.toISOString().slice(0,10)
+      h.innerHTML += `${days[t.getDay()]} ${k.slice(5)} ${x[k]||''}<br>`
+    }
+  }
+  render()
+</script>
+</html>
