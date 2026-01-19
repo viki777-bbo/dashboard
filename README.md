@@ -8,3 +8,9 @@ je to dashboard pro výuku HTML , CSS a JavaScriptu v hodinách WEBu.
 - zobrazení času 
 - zobrazení počasí
 - funkční kalkulačka
+- zobrazení datumu
+- fotogalerie
+- Měření nálady
+- Počítadlo výrobní linky Volkswagen
+- Todo list
+- Měnič pozadí
