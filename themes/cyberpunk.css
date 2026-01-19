@@ -1,0 +1,14 @@
+:root {
+    --body-bg: #0a0e27;          /* full background celé stránky */
+    --widget-bg: #1a1f3a;        /* pozadí widgetů */
+    --text-color: #00ff41;       /* barva textu */
+    --shadow-color: rgba(255, 0, 128, 0.2);
+    --shadow-hover: rgba(255, 0, 128, 0.35);
+    --primary-color: #ff0080;
+    --primary-color-text: #00ff41;
+}
+
+/* Full background pro celou stránku */
+body {
+    background-color: var(--body-bg);
+}

@@ -1,0 +1,60 @@
+<!-- Přepínač motivů -->
+<div class="theme-switcher">
+    <button onclick="switchTheme('light')" class="theme-btn" data-theme="light">Světlé</button>
+    <button onclick="switchTheme('dark')" class="theme-btn" data-theme="dark">Tmavé</button>
+    <button onclick="switchTheme('blue')" class="theme-btn" data-theme="blue">Modré</button>
+    <button onclick="switchTheme('cyberpunk')" class="theme-btn" data-theme="cyberpunk">Cyberpunk</button>
+</div>
+
+<style>
+.theme-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s;
+}
+
+.theme-btn:hover,
+.theme-btn.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+</style>
+
+<script>
+/* Přepnutí motivu */
+function switchTheme(theme) {
+    const themeLink = document.getElementById('theme-styles');
+
+    if (!themeLink) {
+        console.error("CHYBA: Nenalezen <link id='theme-styles'> v <head>");
+        return;
+    }
+
+    // Načtení CSS ze složky themes/
+    themeLink.href = `themes/${theme}.css`;
+
+    // Uložení volby
+    localStorage.setItem('selectedTheme', theme);
+
+    // Zvýraznění aktivního tlačítka
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+}
+
+/* Po načtení stránky – načteme uložený motiv */
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('selectedTheme') || 'light';
+    switchTheme(savedTheme);
+});
+</script>

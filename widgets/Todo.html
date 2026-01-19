@@ -54,82 +54,82 @@
         }
     </script>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        .todo-widget {
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-        .todo-widget h3 {
-            color: #ff0000;
-            margin: 0 0 15px 0;
-            font-size: 24px;
-        }
-        .input-group,
-        .todo-widget li,
-        .todo-item-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .input-group input {
-            flex: 1;
-            padding: 12px;
-            background: rgba(255, 0, 0, 0.1);
-            border: 2px solid #ff0000;
-            font-size: 14px;
-        }
-        .input-group button {
-            padding: 12px 20px;
-            background: #ff0000;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .input-group button:hover {
-            background: #cc0000;
-        }
-        .todo-widget ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0 0;
-        }
-        .todo-widget li {
-            padding: 12px;
-            margin-bottom: 8px;
-            background: rgba(255, 0, 0, 0.1);
-            border: 2px solid #ff0000;
-            display: flex;
-            box-shadow: 1px 1px 10px rgba(0,0,0,.3);
-            justify-content: space-between;
-        }
-        .completed span {
-            text-decoration: line-through;
-            font-weight: bold;
-        }
-        .todo-widget button {
-            cursor: pointer;
-        }
-        .delete-btn {
-            background: #ff0000;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .delete-btn:hover {
-            background: #cc0000;
-        }
-        
-    </style>
+   <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .todo-widget {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .todo-widget h3 {
+        color: var(--primary-color, #ff0000);
+        margin: 0 0 15px 0;
+        font-size: 24px;
+        text-shadow: 1px 1px 2px var(--shadow-color, rgba(0,0,0,0.3));
+    }
+    .input-group,
+    .todo-widget li,
+    .todo-item-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .input-group input {
+        flex: 1;
+        padding: 12px;
+        background: rgba(255, 0, 0, 0.1);
+        border: 2px solid var(--primary-color, #ff0000);
+        font-size: 14px;
+    }
+    .input-group button {
+        padding: 12px 20px;
+        background: var(--primary-color, #ff0000);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .input-group button:hover {
+        background: var(--hover-color, #cc0000);
+    }
+    .todo-widget ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0 0;
+    }
+    .todo-widget li {
+        padding: 12px;
+        margin-bottom: 8px;
+        background: rgba(255, 0, 0, 0.1);
+        border: 2px solid var(--primary-color, #ff0000);
+        display: flex;
+        box-shadow: 1px 1px 10px var(--shadow-color, rgba(0,0,0,.3));
+        justify-content: space-between;
+    }
+    .completed span {
+        text-decoration: line-through;
+        font-weight: bold;
+    }
+    .todo-widget button {
+        cursor: pointer;
+    }
+    .delete-btn {
+        background: var(--primary-color, #ff0000);
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .delete-btn:hover {
+        background: var(--hover-color, #cc0000);
+    }
+</style>
 </body>
 </html>

@@ -5,6 +5,7 @@
   <title>Osobní dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="theme-styles" href="themes/light.css">
 </head>
 <body>
   <main id="dashboard" class="grid"></main>
@@ -15,7 +16,8 @@
     // nebo jednoduše string pro výchozí šířku
     const widgets = [
       { name: 'header', width: 'full' },
-            { name: 'Clock', width: 'half' },
+          { name: 'theme-switcher', width: 'full' },
+              { name: 'Clock', width: 'half' },
                   { name: 'Date', width: 'half' },
                         { name: 'Weather', width: 'third' },
                               { name: 'Calculator', width: 'third' },
